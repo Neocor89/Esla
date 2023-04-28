@@ -6,6 +6,9 @@ import { useRouter } from "expo-router";
 export default function ClimateScreen() {
   const router = useRouter();
 
+  // RESTART HERE 👇
+  // TODO CREATE README
+
   return (
     <View style={styles.container}>
       <Image source={climateImage} style={styles.image} resizeMode="cover" />
