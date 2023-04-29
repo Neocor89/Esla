@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  FlatList,
+  Pressable,
+} from "react-native";
 import {
   FontAwesome,
   Entypo,
@@ -9,24 +16,67 @@ import {
 import car from "../assets/images/car.png";
 import menuOptions from "../assets/menuOptions";
 import MenuOption from "../components/MenuOption";
+import { useState } from "react";
 
 const Controls = () => {
+  const [charging, setCharging] = useState(false);
+  const [locking, setLocking] = useState(false);
+  const [fresh, setFresh] = useState(false);
+  const [drive, setDrive] = useState(false);
+
+  const [toggle, setToggle] = useState(false);
+
+  const toggleIcon = () => {
+    setToggle(!toggle);
+  };
+  // <Ionicons name="car-sport" size={24} color="black" />
   return (
     <View style={styles.controls}>
-      <Entypo name="lock" size={26} color="gray" />
-      <MaterialCommunityIcons name="fan" size={26} color="gray" />
-      <FontAwesome5 name="bolt" size={26} color="gray" />
-      <Ionicons name="car-sport-sharp" size={26} color="gray" />
+      <Pressable onPress={() => setLocking(!locking && toggleIcon)}>
+        <Entypo
+          name={toggle ? "lock-open" : "lock"}
+          size={26}
+          color={locking ? "white" : "gray" && toggle ? "white" : "gray"}
+        />
+      </Pressable>
+
+      <Pressable onPress={() => setFresh(!fresh)}>
+        <MaterialCommunityIcons
+          name="fan"
+          size={26}
+          color={fresh ? "white" : "gray"}
+        />
+      </Pressable>
+
+      <Pressable onPress={() => setCharging(!charging)}>
+        <FontAwesome5
+          name="bolt"
+          size={26}
+          color={charging ? "#01de7c" : "gray"}
+        />
+      </Pressable>
+
+      <Pressable onPress={() => setDrive(!drive)}>
+        <Ionicons
+          name="car-sport-sharp"
+          size={26}
+          color={drive ? "white" : "gray"}
+        />
+      </Pressable>
     </View>
   );
 };
-
+//
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View>
           <Text style={styles.title}>My Model S</Text>
+          <View style={styles.batteryContainer}>
+            <FontAwesome name="battery-3" size={24} color="gray" />
+            <Text style={styles.percent}>80%</Text>
+          </View>
           <Text style={styles.subtitle}>Parked</Text>
         </View>
 
@@ -60,11 +110,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  batteryContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 3,
+  },
   title: {
     fontSize: 24,
     color: "#eee",
     fontWeight: "bold",
     marginBottom: 8,
+  },
+  percent: {
+    color: "gray",
+    fontWeight: "500",
+    marginLeft: 5,
   },
   subtitle: {
     color: "gray",

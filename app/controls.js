@@ -1,10 +1,14 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
-import climateImage from "../assets/images/climate.png";
-import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import carControl from "../assets/images/car-controls.png";
+import {
+  Entypo,
+  MaterialCommunityIcons,
+  FontAwesome5,
+} from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 
-export default function ClimateScreen() {
+export default function ControlsScreen() {
   const router = useRouter();
 
   const [temperature, setTemperature] = useState(28);
@@ -12,65 +16,62 @@ export default function ClimateScreen() {
 
   return (
     <View style={styles.container}>
-      <Image source={climateImage} style={styles.image} resizeMode="cover" />
+      <Image source={carControl} style={styles.image} resizeMode="contain" />
 
       <Pressable onPress={() => router.back()} style={styles.back}>
         <Entypo name="chevron-left" size={24} color="white" />
       </Pressable>
 
       <View style={styles.footer}>
-        <Text style={styles.labelTemp}>Exterior 34° - Interior 24°</Text>
-
         <View style={styles.controlTemp}>
           <Pressable
             onPress={() => setOn(!on)}
             style={styles.iconButtonContainer}
           >
             <MaterialCommunityIcons
-              name="power"
-              size={40}
+              name="car-light-high"
+              size={30}
               color={on ? "white" : "gray"}
             />
             <Text style={styles.iconButtonText}>{on ? "on" : "off"}</Text>
           </Pressable>
 
+          <MaterialCommunityIcons
+            name="trumpet"
+            size={30}
+            color={on ? "white" : "gray"}
+          />
+          <MaterialCommunityIcons
+            name="remote"
+            size={30}
+            color={on ? "white" : "gray"}
+          />
+          <FontAwesome5
+            name="house-damage"
+            size={26}
+            color={on ? "white" : "gray"}
+          />
+
           <View style={styles.temperatureContainer}>
-            <Entypo
+            {/* <Entypo
               onPress={() => setTemperature(temperature - 1)}
               name="chevron-left"
               size={34}
               color="gray"
-            />
-            <Text style={styles.temperatureText}>{temperature}°</Text>
-            <Entypo
+              />
+              <Text style={styles.temperatureText}>{temperature}°</Text>
+              <Entypo
               onPress={() => setTemperature(temperature + 1)}
               name="chevron-right"
               size={34}
               color="gray"
-            />
-          </View>
-          <View style={styles.iconButtonContainer}>
-            <MaterialCommunityIcons name="car-door" size={42} color="gray" />
-            <Text style={styles.iconButtonText}>Vent</Text>
+            /> */}
           </View>
         </View>
       </View>
     </View>
   );
 }
-
-/* 
-<View style={styles.controlTemp}>
-          <View style={styles.iconButtonContainer}>
-            <MaterialCommunityIcons
-              onPress={() => setOn(!on)}
-              name="power"
-              size={40}
-              color="white"
-            />
-            <Text style={styles.iconButtonText}>{on ? "on" : "off"}</Text>
-          </View>
-*/
 
 const styles = StyleSheet.create({
   container: {
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: "70%",
+    height: "95%",
   },
   back: {
     position: "absolute",
@@ -91,9 +92,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: "center",
-    padding: 12,
     marginBottom: 20,
     marginTop: "auto",
+    // backgroundColor: "green",
+    flexDirection: "row",
   },
   labelTemp: {
     color: "gray",
@@ -104,7 +106,8 @@ const styles = StyleSheet.create({
   controlTemp: {
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-around",
+    marginLeft: 28,
+    justifyContent: "space-between",
   },
   iconButtonContainer: {
     alignItems: "center",
