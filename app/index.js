@@ -29,7 +29,7 @@ const Controls = () => {
   const toggleIcon = () => {
     setToggle(!toggle);
   };
-  // <Ionicons name="car-sport" size={24} color="black" />
+
   return (
     <View style={styles.controls}>
       <Pressable onPress={() => setLocking(!locking && toggleIcon)}>
