@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
-import carControl from "../assets/images/car-controls.png";
+import carControl from "../assets/images/controls-car.png";
 import {
-  Entypo,
+  AntDesign,
   MaterialCommunityIcons,
   FontAwesome5,
 } from "@expo/vector-icons";
@@ -11,21 +11,32 @@ import { useState } from "react";
 export default function ControlsScreen() {
   const router = useRouter();
 
-  const [temperature, setTemperature] = useState(28);
+  const [toggle, setToggle] = useState(false);
+
+  const toggleIcon = () => {
+    setToggle(!toggle);
+  };
   const [on, setOn] = useState(false);
+  const [honk, setHonk] = useState(false);
+  const [remote, setRemote] = useState(false);
+  const [homeLink, setHomeLink] = useState(false);
+
+  //+ RESTART HERE 👇
+  // TODO - LAYOUT FOR ICONS | CHANGE ONPRESS METHODE AND USESTATE
 
   return (
     <View style={styles.container}>
       <Image source={carControl} style={styles.image} resizeMode="contain" />
 
       <Pressable onPress={() => router.back()} style={styles.back}>
-        <Entypo name="chevron-left" size={24} color="white" />
+        <AntDesign name="left" size={24} color="white" />
       </Pressable>
 
       <View style={styles.footer}>
         <View style={styles.controlTemp}>
+          {/* CAR LIGHT */}
           <Pressable
-            onPress={() => setOn(!on)}
+            onPress={() => setOn(!on) && toggleIcon}
             style={styles.iconButtonContainer}
           >
             <MaterialCommunityIcons
@@ -33,40 +44,51 @@ export default function ControlsScreen() {
               size={30}
               color={on ? "white" : "gray"}
             />
-            <Text style={styles.iconButtonText}>{on ? "on" : "off"}</Text>
+            <Text style={toggle ? styles.iconButtonText : styles.iconButton}>
+              flash
+            </Text>
           </Pressable>
 
-          <MaterialCommunityIcons
-            name="trumpet"
-            size={30}
-            color={on ? "white" : "gray"}
-          />
-          <MaterialCommunityIcons
-            name="remote"
-            size={30}
-            color={on ? "white" : "gray"}
-          />
-          <FontAwesome5
-            name="house-damage"
-            size={26}
-            color={on ? "white" : "gray"}
-          />
+          {/* CAR HONK */}
+          <Pressable
+            onPress={() => setHonk(!honk)}
+            style={styles.iconButtonContainer}
+          >
+            <MaterialCommunityIcons
+              name="trumpet"
+              size={30}
+              color={honk ? "white" : "gray"}
+            />
+            <Text style={styles.iconButtonText}>Honk</Text>
+          </Pressable>
 
-          <View style={styles.temperatureContainer}>
-            {/* <Entypo
-              onPress={() => setTemperature(temperature - 1)}
-              name="chevron-left"
-              size={34}
-              color="gray"
-              />
-              <Text style={styles.temperatureText}>{temperature}°</Text>
-              <Entypo
-              onPress={() => setTemperature(temperature + 1)}
-              name="chevron-right"
-              size={34}
-              color="gray"
-            /> */}
-          </View>
+          {/* CAR REMOTE */}
+          <Pressable
+            onPress={() => setRemote(!remote)}
+            style={styles.iconButtonContainer}
+          >
+            <MaterialCommunityIcons
+              name="remote"
+              size={30}
+              color={remote ? "white" : "gray"}
+            />
+            <Text style={styles.iconButtonText}>01:45</Text>
+          </Pressable>
+
+          {/* CAR HOMELINK */}
+          <Pressable
+            onPress={() => setHomeLink(!homeLink)}
+            style={styles.iconButtonContainer}
+          >
+            <FontAwesome5
+              name="house-damage"
+              size={26}
+              color={homeLink ? "white" : "gray"}
+            />
+            <Text style={styles.iconButtonText}>Homelink</Text>
+          </Pressable>
+
+          <View style={styles.temperatureContainer}></View>
         </View>
       </View>
     </View>
