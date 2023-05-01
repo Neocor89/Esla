@@ -11,18 +11,20 @@ import { useState } from "react";
 export default function ControlsScreen() {
   const router = useRouter();
 
-  const [toggle, setToggle] = useState(false);
-
-  const toggleIcon = () => {
-    setToggle(!toggle);
-  };
-  const [on, setOn] = useState(false);
   const [honk, setHonk] = useState(false);
   const [remote, setRemote] = useState(false);
   const [homeLink, setHomeLink] = useState(false);
 
   //+ RESTART HERE 👇
-  // TODO - LAYOUT FOR ICONS | CHANGE ONPRESS METHODE AND USESTATE
+  //! NOT ADDING VSCODE SETTINGS
+  // TODO - TEST NEW COLORS FOR THEME AND CREATE CUSTOM THEME
+
+  const [color, setColor] = useState("gray"); // initial color
+  const toggleColor = () => {
+    // change color to white if gray, or to gray if white
+    // style={[styles.button, {backgroundColor: color}]} onPress={toggleColor
+    color === "gray" ? setColor("white") : setColor("gray");
+  };
 
   return (
     <View style={styles.container}>
@@ -36,17 +38,15 @@ export default function ControlsScreen() {
         <View style={styles.controlTemp}>
           {/* CAR LIGHT */}
           <Pressable
-            onPress={() => setOn(!on) && toggleIcon}
+            onPress={() => toggleColor(color)}
             style={styles.iconButtonContainer}
           >
             <MaterialCommunityIcons
               name="car-light-high"
               size={30}
-              color={on ? "white" : "gray"}
+              color={color}
             />
-            <Text style={toggle ? styles.iconButtonText : styles.iconButton}>
-              flash
-            </Text>
+            <Text style={styles.iconButtonText}>flash</Text>
           </Pressable>
 
           {/* CAR HONK */}
@@ -82,7 +82,7 @@ export default function ControlsScreen() {
           >
             <FontAwesome5
               name="house-damage"
-              size={26}
+              size={30}
               color={homeLink ? "white" : "gray"}
             />
             <Text style={styles.iconButtonText}>Homelink</Text>
@@ -145,8 +145,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   iconButtonText: {
-    color: "white",
-    fontSize: 18,
+    color: "#bfcede",
+    fontSize: 15,
     fontWeight: "600",
     marginTop: 10,
   },
