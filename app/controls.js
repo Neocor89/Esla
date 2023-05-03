@@ -15,10 +15,6 @@ export default function ControlsScreen() {
   const [remote, setRemote] = useState(false);
   const [homeLink, setHomeLink] = useState(false);
 
-  //+ RESTART HERE 👇
-  //! NOT ADDING VSCODE SETTINGS
-  // TODO - TEST NEW COLORS FOR THEME AND CREATE CUSTOM THEME
-
   const [color, setColor] = useState("gray"); // initial color
   const toggleColor = () => {
     // change color to white if gray, or to gray if white
