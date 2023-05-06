@@ -6,21 +6,11 @@ import {
   FontAwesome5,
 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+
+import IconOptions from "../components/IconOptions";
 
 export default function ControlsScreen() {
   const router = useRouter();
-
-  const [honk, setHonk] = useState(false);
-  const [remote, setRemote] = useState(false);
-  const [homeLink, setHomeLink] = useState(false);
-
-  const [color, setColor] = useState("gray"); // initial color
-  const toggleColor = () => {
-    // change color to white if gray, or to gray if white
-    // style={[styles.button, {backgroundColor: color}]} onPress={toggleColor
-    color === "gray" ? setColor("white") : setColor("gray");
-  };
 
   return (
     <View style={styles.container}>
@@ -33,56 +23,16 @@ export default function ControlsScreen() {
       <View style={styles.footer}>
         <View style={styles.controlTemp}>
           {/* CAR LIGHT */}
-          <Pressable
-            onPress={() => toggleColor(color)}
-            style={styles.iconButtonContainer}
-          >
-            <MaterialCommunityIcons
-              name="car-light-high"
-              size={30}
-              color={color}
-            />
-            <Text style={styles.iconButtonText}>flash</Text>
-          </Pressable>
+          <IconOptions iconType={"car-light-high"} text={"flash"} />
 
           {/* CAR HONK */}
-          <Pressable
-            onPress={() => setHonk(!honk)}
-            style={styles.iconButtonContainer}
-          >
-            <MaterialCommunityIcons
-              name="trumpet"
-              size={30}
-              color={honk ? "white" : "gray"}
-            />
-            <Text style={styles.iconButtonText}>Honk</Text>
-          </Pressable>
+          <IconOptions iconType={"trumpet"} text={"Honk"} />
 
           {/* CAR REMOTE */}
-          <Pressable
-            onPress={() => setRemote(!remote)}
-            style={styles.iconButtonContainer}
-          >
-            <MaterialCommunityIcons
-              name="remote"
-              size={30}
-              color={remote ? "white" : "gray"}
-            />
-            <Text style={styles.iconButtonText}>01:45</Text>
-          </Pressable>
+          <IconOptions iconType={"remote"} text={"01:45"} />
 
           {/* CAR HOMELINK */}
-          <Pressable
-            onPress={() => setHomeLink(!homeLink)}
-            style={styles.iconButtonContainer}
-          >
-            <FontAwesome5
-              name="house-damage"
-              size={30}
-              color={homeLink ? "white" : "gray"}
-            />
-            <Text style={styles.iconButtonText}>Homelink</Text>
-          </Pressable>
+          <IconOptions iconType={"greenhouse"} text={"Homelink"} />
 
           <View style={styles.temperatureContainer}></View>
         </View>
