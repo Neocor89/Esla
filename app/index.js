@@ -9,7 +9,6 @@ import {
 import {
   FontAwesome,
   Entypo,
-  MaterialCommunityIcons,
   FontAwesome5,
   Ionicons,
 } from "@expo/vector-icons";
@@ -17,11 +16,11 @@ import car from "../assets/images/car.png";
 import menuOptions from "../assets/menuOptions";
 import MenuOption from "../components/MenuOption";
 import { useState } from "react";
+import IconOptions from "../components/IconOptions";
 
 const Controls = () => {
   const [charging, setCharging] = useState(false);
   const [locking, setLocking] = useState(false);
-  const [fresh, setFresh] = useState(false);
   const [drive, setDrive] = useState(false);
 
   const [toggle, setToggle] = useState(false);
@@ -40,13 +39,7 @@ const Controls = () => {
         />
       </Pressable>
 
-      <Pressable onPress={() => setFresh(!fresh)}>
-        <MaterialCommunityIcons
-          name="fan"
-          size={26}
-          color={fresh ? "white" : "gray"}
-        />
-      </Pressable>
+      <IconOptions iconType={"fan"} text={""} />
 
       <Pressable onPress={() => setCharging(!charging)}>
         <FontAwesome5
@@ -84,8 +77,6 @@ export default function Page() {
       </View>
 
       <Image style={styles.image} source={car} resizeMode="contain" />
-
-      {/* <Controls /> */}
 
       {/* Render List Menu Options */}
       <FlatList
