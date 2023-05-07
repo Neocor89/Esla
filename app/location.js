@@ -1,20 +1,28 @@
 import { useRouter } from "expo-router";
 import { StyleSheet, View, Pressable } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Polyline } from "react-native-maps";
 import {
   Entypo,
   FontAwesome,
   FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import MapViewDirections from "react-native-maps-directions";
 
 export default function LocationScreen() {
   const router = useRouter();
 
-  const location = {
+  const myLocation = {
     latitude: 37.78825,
     longitude: -122.4324,
   };
+
+  const carLocation = {
+    latitude: 37.78525,
+    longitude: -122.4224,
+  };
+
+  // TODO RESTART HERE 👇
 
   return (
     <View style={styles.container}>
@@ -41,20 +49,35 @@ export default function LocationScreen() {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitude: myLocation.latitude,
+          longitude: myLocation.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}
         // mapType="satellite"
         // showsUserLocation={true}
       >
-        <View>
-          <Marker
-            coordinate={location}
-            image={require("../assets/images/maps.png")}
-          />
-        </View>
+        <Marker
+          coordinate={myLocation}
+          image={require("../assets/images/maps.png")}
+          title={"My Position"}
+        />
+        <Marker
+          coordinate={carLocation}
+          title={"My Model S"}
+          image={require("../assets/images/car-s.png")}
+          style={styles.carMap}
+        />
+
+        {/* <Polyline
+          coordinates={[
+            { latitude: 37.78825, longitude: -122.4324 },
+            { latitude: 37.78525, longitude: -122.4224 },
+          ]}
+          
+          strokeColor={"#000"}
+          strokeWidth={2}
+        /> */}
       </MapView>
     </View>
   );
@@ -106,5 +129,8 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  carMap: {
+    width: 10,
   },
 });
