@@ -1,11 +1,5 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
-import {
-  FontAwesome,
-  Entypo,
-  MaterialCommunityIcons,
-  FontAwesome5,
-  Ionicons,
-} from "@expo/vector-icons";
+import { Text, StyleSheet, Pressable } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
 export default function IconOptions({ iconType, text }) {
