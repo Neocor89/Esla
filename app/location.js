@@ -4,12 +4,16 @@ import MapView, { Marker, Polyline } from "react-native-maps";
 import {
   Entypo,
   FontAwesome,
-  FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+
+// TODO --> RESTART HERE ADD GOOGLE API KEY & INSTALL 👇
 import MapViewDirections from "react-native-maps-directions";
+import { useState } from "react";
 
 export default function LocationScreen() {
+  const [mapType, setMapType] = useState("standard");
+
   const router = useRouter();
 
   const myLocation = {
@@ -43,7 +47,14 @@ export default function LocationScreen() {
       </Pressable>
 
       <Pressable onPress={() => router.back()} style={styles.lastBottom}>
-        <MaterialCommunityIcons name="earth" size={17} color="white" />
+        <MaterialCommunityIcons
+          name="earth"
+          size={17}
+          color="white"
+          onPress={() =>
+            setMapType(mapType === "standard" ? "satellite" : "standard")
+          }
+        />
       </Pressable>
 
       <MapView
@@ -54,7 +65,7 @@ export default function LocationScreen() {
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
-        // mapType="satellite"
+        mapType={mapType}
         // showsUserLocation={true}
       >
         <Marker
