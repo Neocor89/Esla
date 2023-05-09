@@ -1,10 +1,6 @@
-import { View, Text, Image, StyleSheet, Pressable } from "react-native";
+import { View, Image, StyleSheet, Pressable } from "react-native";
 import carControl from "../assets/images/controls-car.png";
-import {
-  AntDesign,
-  MaterialCommunityIcons,
-  FontAwesome5,
-} from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 import IconOptions from "../components/IconOptions";
