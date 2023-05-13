@@ -7,8 +7,6 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
-// TODO --> RESTART HERE ADD GOOGLE API KEY & INSTALL 👇
-import MapViewDirections from "react-native-maps-directions";
 import { useState } from "react";
 
 export default function LocationScreen() {
@@ -27,6 +25,7 @@ export default function LocationScreen() {
   };
 
   // TODO RESTART HERE 👇
+  //+ FINISH BUTTON ACTIONS
 
   return (
     <View style={styles.container}>
