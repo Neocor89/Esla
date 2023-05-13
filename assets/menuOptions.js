@@ -1,4 +1,4 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default [
   {
@@ -27,18 +27,20 @@ export default [
     href: "/security",
   },
   {
-    name: "Updates",
+    name: "Upgrades",
     iconName: "update",
-    href: "/updates",
+    href: "/upgrades",
   },
   {
-    name: "Pet mode",
-    iconName: "dog",
-    href: "/pet-mode",
+    name: "Service",
+    iconName: "wrench",
+    href: "/services",
   },
   {
-    name: "Doctor",
-    icon: () => <FontAwesome name="user-md" size={26} color="gray" />,
-    href: "/doctor",
+    name: "Roadside",
+    icon: () => (
+      <MaterialCommunityIcons name="sign-caution" size={24} color="gray" />
+    ),
+    href: "/roadside",
   },
 ];
