@@ -1,6 +1,13 @@
 import { useRouter } from "expo-router";
-import { StyleSheet, View, Pressable } from "react-native";
-import MapView, { Marker, Polyline } from "react-native-maps";
+import {
+  StyleSheet,
+  View,
+  Pressable,
+  TouchableOpacity,
+  Modal,
+  Text,
+} from "react-native";
+import MapView, { Marker } from "react-native-maps";
 import {
   Entypo,
   FontAwesome,
@@ -12,6 +19,12 @@ import { useState } from "react";
 export default function LocationScreen() {
   const [mapType, setMapType] = useState("standard");
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleMarkerPress = () => {
+    setModalVisible(true);
+  };
+
   const router = useRouter();
 
   const myLocation = {
@@ -20,12 +33,15 @@ export default function LocationScreen() {
   };
 
   const carLocation = {
-    latitude: 37.78525,
-    longitude: -122.4224,
+    latitude: 37.78659,
+    longitude: -122.4294,
   };
 
   // TODO RESTART HERE 👇
   //+ FINISH BUTTON ACTIONS
+  //: FIND IMAGE OF TESLA CARD
+  //: CREATE IMAGE CONTAINER WITH PART OF CAR
+  //: CREATE SUBSCRIPTIONS PAGE WITH OPTIONS
 
   return (
     <View style={styles.container}>
@@ -33,9 +49,19 @@ export default function LocationScreen() {
         <Entypo name="chevron-left" size={24} color="white" />
       </Pressable>
 
-      <Pressable onPress={() => router.back()} style={styles.left}>
+      <Pressable onPress={handleMarkerPress} style={styles.left}>
         <FontAwesome name="location-arrow" size={16} color="white" />
       </Pressable>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <TouchableOpacity
+            style={{ paddingTop: 560 }}
+            onPress={() => setModalVisible(false)}
+          >
+            <Text>Hide Modal</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
 
       <Pressable onPress={() => router.back()} style={styles.leftBottom}>
         <MaterialCommunityIcons
