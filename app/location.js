@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Modal,
   Text,
+  Image,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import {
@@ -37,11 +38,11 @@ export default function LocationScreen() {
     longitude: -122.4294,
   };
 
-  // TODO RESTART HERE 👇
   //+ FINISH BUTTON ACTIONS
   //: FIND IMAGE OF TESLA CARD
-  //: CREATE IMAGE CONTAINER WITH PART OF CAR
-  //: CREATE SUBSCRIPTIONS PAGE WITH OPTIONS
+  //: CREATE IMAGE CONTAINER WITH PART OF CAR = FIND RESSOURCES
+  //: CREATE SUBSCRIPTIONS PAGE WITH OPTIONS = FIND RESSOURCES
+  // TODO RESTART HERE 👇
 
   return (
     <View style={styles.container}>
@@ -52,13 +53,19 @@ export default function LocationScreen() {
       <Pressable onPress={handleMarkerPress} style={styles.left}>
         <FontAwesome name="location-arrow" size={16} color="white" />
       </Pressable>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal animationType="slide" transparent={false} visible={modalVisible}>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Image
+            source={{
+              uri: "https://res.cloudinary.com/dwoifuutn/image/upload/v1674552363/blog-banner_ovjyfb.png",
+            }}
+            style={styles.image}
+          />
           <TouchableOpacity
             style={{ paddingTop: 560 }}
             onPress={() => setModalVisible(false)}
           >
-            <Text>Hide Modal</Text>
+            <Text style={styles.btnModal}>Hide Modal</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -162,6 +169,17 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     zIndex: 99999,
+  },
+  image: {
+    width: 200,
+    height: 200,
+  },
+  btnModal: {
+    padding: 10,
+    backgroundColor: "#5bc267",
+    color: "#FFFFFF",
+    position: "relative",
+    right: -110,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
