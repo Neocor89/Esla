@@ -38,11 +38,12 @@ export default function LocationScreen() {
     longitude: -122.4294,
   };
 
+  // TODO RESTART HERE 👇
+
   //+ FINISH BUTTON ACTIONS
   //: FIND IMAGE OF TESLA CARD
   //: CREATE IMAGE CONTAINER WITH PART OF CAR = FIND RESSOURCES
   //: CREATE SUBSCRIPTIONS PAGE WITH OPTIONS = FIND RESSOURCES
-  // TODO RESTART HERE 👇
 
   return (
     <View style={styles.container}>
@@ -55,12 +56,40 @@ export default function LocationScreen() {
       </Pressable>
       <Modal animationType="slide" transparent={false} visible={modalVisible}>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <Image
-            source={{
-              uri: "https://res.cloudinary.com/dwoifuutn/image/upload/v1674552363/blog-banner_ovjyfb.png",
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: myLocation.latitude,
+              longitude: myLocation.longitude,
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01,
             }}
-            style={styles.image}
-          />
+            mapType={mapType}
+            // showsUserLocation={true}
+          >
+            <Marker
+              coordinate={myLocation}
+              image={require("../assets/images/maps.png")}
+              title={"My Position"}
+            />
+            <Marker
+              coordinate={carLocation}
+              title={"My Model S"}
+              style={styles.carMap}
+              pinColor="#FFFFFF"
+              isPreselected={true}
+            />
+
+            {/* <Polyline
+          coordinates={[
+            { latitude: 37.78825, longitude: -122.4324 },
+            { latitude: 37.78525, longitude: -122.4224 },
+          ]}
+          
+          strokeColor={"#000"}
+          strokeWidth={2}
+        /> */}
+          </MapView>
           <TouchableOpacity
             style={{ paddingTop: 560 }}
             onPress={() => setModalVisible(false)}
