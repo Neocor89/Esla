@@ -28,14 +28,24 @@ export default function LocationScreen() {
 
   const router = useRouter();
 
+  const modalLocation = {
+    latitude: 37.78825,
+    longitude: -122.4324,
+  };
+
+  const modalCarLocation = {
+    latitude: 37.78865,
+    longitude: -122.432,
+  };
+
   const myLocation = {
     latitude: 37.78825,
     longitude: -122.4324,
   };
 
   const carLocation = {
-    latitude: 37.78659,
-    longitude: -122.4294,
+    latitude: 37.78985,
+    longitude: -122.4322,
   };
 
   // TODO RESTART HERE 👇
@@ -54,40 +64,33 @@ export default function LocationScreen() {
       <Pressable onPress={handleMarkerPress} style={styles.left}>
         <FontAwesome name="location-arrow" size={16} color="white" />
       </Pressable>
+
+      {/* MODAL */}
+
       <Modal animationType="slide" transparent={false} visible={modalVisible}>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <MapView
             style={styles.map}
             initialRegion={{
-              latitude: myLocation.latitude,
-              longitude: myLocation.longitude,
-              latitudeDelta: 0.01,
-              longitudeDelta: 0.01,
+              latitude: modalLocation.latitude,
+              longitude: modalLocation.longitude,
+              latitudeDelta: 0.001,
+              longitudeDelta: 0.001,
             }}
             mapType={mapType}
             // showsUserLocation={true}
           >
             <Marker
-              coordinate={myLocation}
-              image={require("../assets/images/maps.png")}
+              coordinate={modalLocation}
+              image={require("../assets/images/arrow-car.png")}
               title={"My Position"}
             />
             <Marker
-              coordinate={carLocation}
+              coordinate={modalCarLocation}
               title={"My Model S"}
               style={styles.carMap}
               pinColor="#1985fa"
             />
-
-            {/* <Polyline
-          coordinates={[
-            { latitude: 37.78825, longitude: -122.4324 },
-            { latitude: 37.78525, longitude: -122.4224 },
-          ]}
-          
-          strokeColor={"#000"}
-          strokeWidth={2}
-        /> */}
           </MapView>
           <TouchableOpacity
             style={{ paddingTop: 560 }}
@@ -122,8 +125,8 @@ export default function LocationScreen() {
         initialRegion={{
           latitude: myLocation.latitude,
           longitude: myLocation.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
+          latitudeDelta: 0.003,
+          longitudeDelta: 0.003,
         }}
         mapType={mapType}
         // showsUserLocation={true}
@@ -139,16 +142,6 @@ export default function LocationScreen() {
           image={require("../assets/images/car-s.png")}
           style={styles.carMap}
         />
-
-        {/* <Polyline
-          coordinates={[
-            { latitude: 37.78825, longitude: -122.4324 },
-            { latitude: 37.78525, longitude: -122.4224 },
-          ]}
-          
-          strokeColor={"#000"}
-          strokeWidth={2}
-        /> */}
       </MapView>
     </View>
   );
