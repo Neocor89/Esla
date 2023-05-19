@@ -76,8 +76,7 @@ export default function LocationScreen() {
               coordinate={carLocation}
               title={"My Model S"}
               style={styles.carMap}
-              pinColor="#FFFFFF"
-              isPreselected={true}
+              pinColor="#1985fa"
             />
 
             {/* <Polyline
